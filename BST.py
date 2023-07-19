@@ -51,11 +51,25 @@ class BST:
             return    
         if self.root == None:
             self.root = node
-            self.contents.append(node.data)      
+            self.contents.append(node.data)
+            return      
         self.add_node(self.root, node)  
 
     def add_node(self, current_node, new_node):
-        
+        if new_node.data > current_node.data:
+            if current_node.right == None:
+                current_node.right = new_node
+                self.contents.append(new_node.data)
+                return
+            else:
+                self.add_node(current_node.right, new_node)
+        else:
+            if current_node.left == None:
+                current_node.left = new_node
+                self.contents.append(new_node.data)
+                return
+            else:
+                self.add_node(current_node.left, new_node)
 
   #Part 3: Add functionality to your BST class
 
@@ -86,6 +100,9 @@ bst.add(node4)
 bst.add(node7)
 bst.add(node13)
 
+print('=======================\n')
+print(bst)
+print('=======================\n')
 #test code
 # node1 = BSTNode(3)
 # print(node1) #3
